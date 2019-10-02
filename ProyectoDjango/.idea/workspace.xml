@@ -2,66 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="520caf51-2f1d-447f-b70c-79189e7728f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../2019-2-Name-out-of-bounds-T4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ProyectoDjango.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProyectoDjango/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProyectoDjango/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProyectoDjango/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProyectoDjango/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-grid.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/bootstrap/js/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/custom.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/bed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/crossed-knife-and-fork.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/default-user-image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/open-book.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/snowshoe-cat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/turing.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/washing-machine.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/clock.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/duracion.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/toggleName.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/templates/LandingPage.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/templates/UserProfile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tarea4/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../T4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -150,6 +92,7 @@
       <workItem from="1570034972248" duration="34000" />
       <workItem from="1570035011163" duration="2125000" />
       <workItem from="1570045529193" duration="1349000" />
+      <workItem from="1570047102251" duration="533000" />
     </task>
     <servers />
   </component>
