@@ -30,4 +30,4 @@ class Admin(models.Model):
 class Relaciones(models.Model):
     user_1 = models.ForeignKey(Usuario, models.SET_NULL, null=True, blank=True, related_name="Owner")
     user_2 = models.ForeignKey(Usuario, models.SET_NULL, null=True, blank=True, related_name="Other")
-    estado = models.CharField(max_length=50)
+    estado = models.CharField(max_length=50);
