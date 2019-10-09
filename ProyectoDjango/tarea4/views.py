@@ -36,10 +36,11 @@ def register(request):
             email = register_form.cleaned_data['email']
             password = register_form.cleaned_data['password']
             emlen = len(email)
-            user = User.objects.create_user(name, email, password)
+            user = User.objects.create_user(username=email, email=email, first_name=name, last_name=lastname,
+                                            password=password)
             user.save()
-            email = email[0:3] + "******" + email[emlen-5:emlen]
+            email = email[0:3] + "****" + email[emlen - 7:emlen]
 
-            return render(request, 'SuccesReg.html', {'nombre': (name + " " +  lastname), 'mail': email})
+            return render(request, 'SuccesReg.html', {'nombre': (name + " " + lastname), 'mail': email})
     else:
         return render(request, 'Register.html')
