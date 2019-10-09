@@ -20,4 +20,4 @@ def login(request):
     else:
         login_form = IniciarSesionForm()
         print("jajaj ayuda")
-        return render(request, 'LogIn.html', {'resultados': "what"})
+        return render(request, 'LogIn.html', {})
