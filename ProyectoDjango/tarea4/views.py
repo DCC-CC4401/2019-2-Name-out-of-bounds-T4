@@ -16,7 +16,8 @@ def login(request):
             password = login_form.cleaned_data['password']
 
             return render(request, 'LogIn.html', {'nombrexd': user, 'resultados': password})
+
     else:
         login_form = IniciarSesionForm()
-
-    return render(request, 'LogIn.html', {'resultados': login_form})
+        print("jajaj ayuda")
+        return render(request, 'LogIn.html', {'resultados': "what"})
