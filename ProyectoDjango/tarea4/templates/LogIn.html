@@ -7,11 +7,9 @@
 <body>
     <form method="post">
     {% csrf_token %}
-        {{  nombrexd }}
     <input type="text" name="user"/>
     <input type="password" name="password"/>
     <button type="submit">Iniciar Sesión</button>
     </form>
-    {{ resultados }}
 </body>
 </html>

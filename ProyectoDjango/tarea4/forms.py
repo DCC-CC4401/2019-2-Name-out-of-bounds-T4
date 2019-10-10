@@ -6,8 +6,6 @@ class IniciarSesionForm(forms.Form):
     password = forms.CharField()
 
 
-class nombrexdForm(forms.Form):
-    nombrexd = forms.CharField(label='nombrexd', max_length=100)
 
 
 class RegisterForm(forms.Form):

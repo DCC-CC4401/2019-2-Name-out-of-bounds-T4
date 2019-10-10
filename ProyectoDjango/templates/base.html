@@ -45,7 +45,13 @@
         </div>
         <div class="text-center py-3">
             <img src="{% static 'img/turing.jpg' %}" class="avatar px-2 py-2">
-            <p class="h6">Bienvenido, <br> Nombre de usuario</p>
+            <p class="h6">Bienvenido, <br>
+                {% if user.is_active %}
+                {{ user.username }}
+                {% else %}
+                No registrado
+                {% endif %}
+            </p>
         </div>
         <ul class="list-unstyled components text-left">
             <li>
@@ -74,7 +80,7 @@
         </ul>
 
         <ul class="list-unstyled text-center py-4">
-            <button type="button" class="btn btn-danger">Cerrar Sesión</button>
+            <button type="button" onclick=location.href="{% url 'logout' %}" class="btn btn-danger">Cerrar Sesión</button>
         </ul>
     </nav>
     {% block body %}
