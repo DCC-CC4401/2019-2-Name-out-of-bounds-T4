@@ -6,12 +6,12 @@
     <!--CONTENIDO PAGINA-->
     <div class="container-fluid p-4 main">
         <div class="row">
-            <img src="{% static 'img/turing.jpg' %}" class="circular mx-auto d-block shadow" height="250px">
+            <img src="{{ MEDIA_URL }}{{ imagefile }}" class="circular mx-auto d-block shadow" height="250px">
         </div>
         <div class="row py-4">
             <div class="col text-center">
                 <p class="h4 text-center text-dark">Nombre de usuario</p>
-                <button type="button" class="btn btn-success">Cambiar imagen</button>
+                <a href="http://127.0.0.1:8000/imagenPerfil" class="btn btn-success" role="button">Cambiar Imagen</a>
             </div>
         </div>
 
