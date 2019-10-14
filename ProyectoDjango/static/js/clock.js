@@ -1,51 +1,62 @@
-var startTime = 0
-var start = 0
-var end = 0
-var diff = 0
-var timerID = 0
+window.onload = function() {
+   pantalla = document.getElementById("chronotime");
+}
+var isMarch = false;
+var acumularTime = 0;
+var res= false;
+function start () {
+         if (isMarch == false && res==false) {
+            timeInicial = new Date();
+            control = setInterval(cronometro,10);
+            isMarch = true;
+            }
 
-function chrono(){
-	end = new Date()
-    diff = end - start
-	diff = new Date(diff)
-	var sec = diff.getSeconds()
-	var min = diff.getMinutes()
-	var hr = diff.getHours()-21
-	if (min < 10){
-		min = "0" + min
-	}
-	if (sec < 10){
-		sec = "0" + sec
-	}
-    document.getElementById("chronotime").innerHTML = hr + ":" + min + ":" + sec
-	timerID = setTimeout("chrono()", 10)
-}
-function chronoStart(){
-	document.chronoForm.startstop.value = "Detener"
-	document.chronoForm.startstop.onclick = chronoStop
-	document.chronoForm.reset.onclick = chronoReset
-    start = new Date()
-	chrono()
-}
-function chronoContinue(){
-	document.chronoForm.startstop.value = "Detener"
-	document.chronoForm.startstop.onclick = chronoStop
-	document.chronoForm.reset.onclick = chronoReset
-	start = new Date()-diff
-	start = new Date(start)
-	chrono()
-}
-function chronoReset(){
-	document.getElementById("chronotime").innerHTML = "0:00:00"
-	start = new Date()
-}
-function chronoStopReset(){
-	document.getElementById("chronotime").innerHTML = "0:00:00"
-	document.chronoForm.startstop.onclick = chronoStart
-}
-function chronoStop(){
-	document.chronoForm.startstop.value = "Reanudar"
-	document.chronoForm.startstop.onclick = chronoContinue
-	document.chronoForm.reset.onclick = chronoStopReset
-	clearTimeout(timerID)
-}
+         if (isMarch==false && res==true){
+         	resume();
+		 	}
+         }
+function cronometro () {
+         timeActual = new Date();
+         acumularTime = timeActual - timeInicial;
+         acumularTime2 = new Date();
+         acumularTime2.setTime(acumularTime);
+         cc = Math.round(acumularTime2.getMilliseconds()/10);
+         ss = acumularTime2.getSeconds();
+         mm = acumularTime2.getMinutes();
+         hh = acumularTime2.getHours()-21;
+         if (cc < 10) {cc = "0"+cc;}
+         if (ss < 10) {ss = "0"+ss;}
+         if (mm < 10) {mm = "0"+mm;}
+         if (hh < 10) {hh = "0"+hh;}
+         pantalla.innerHTML = hh+":"+mm+":"+ss;
+         }
+
+function stop () {
+         if (isMarch == true) {
+            clearInterval(control);
+            isMarch = false;
+            res=true;
+            }
+         }
+
+function resume () {
+         if (isMarch == false) {
+            timeActu2 = new Date();
+            timeActu2 = timeActu2.getTime();
+            acumularResume = timeActu2-acumularTime;
+
+            timeInicial.setTime(acumularResume);
+            control = setInterval(cronometro,10);
+            isMarch = true;
+            }
+         }
+
+function reset () {
+         if (isMarch == true) {
+            clearInterval(control);
+            isMarch = false;
+            res=false;
+            }
+         acumularTime = 0;
+         pantalla.innerHTML = "00:00:00";
+         }
