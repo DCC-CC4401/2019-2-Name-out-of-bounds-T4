@@ -13,7 +13,7 @@ def landingpage(request):
 
 def logout(request):
     do_logout(request)
-    return render(request,'LogIn.html')
+    return render(request,'LandingPage.html')
 
 def perfil(request):
     return render(request, 'UserProfile.html')
@@ -29,11 +29,6 @@ def login(request):
             if user is not None:
                 do_login(request,user)
                 return render(request, 'LandingPage.html')
-    return render(request, 'LogIn.html')
-
-
-def register(request):
-    if request.method == 'POST':
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             name = register_form.cleaned_data['name']
@@ -43,11 +38,12 @@ def register(request):
             try:
                 user=User.objects.create_user(username=email, email=email, first_name=name, last_name=lastname, password=password)
             except:
-                return render(request, 'Register.html')
+                return render(request, 'LogIn.html')
 
             user.save()
             if user is not None:
                 do_login(request,user)
                 return render(request, 'SuccesReg.html')
+    return render(request, 'LogIn.html')
 
-    return render(request, 'Register.html')
+

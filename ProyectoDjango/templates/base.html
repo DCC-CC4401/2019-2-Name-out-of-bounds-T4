@@ -47,7 +47,7 @@
             <img src="{% static 'img/turing.jpg' %}" class="avatar px-2 py-2">
             <p class="h6">Bienvenido, <br>
                 {% if user.is_active %}
-                {{ user.username }}
+                {{ user.first_name}} {{ user.last_name }}
                 {% else %}
                 No registrado
                 {% endif %}
