@@ -13,3 +13,6 @@ class RegisterForm(forms.Form):
     lastname = forms.CharField(max_length=140)
     password = forms.CharField(widget=forms.PasswordInput)
     email = forms.EmailField(max_length=140)
+
+class CambioDeImagenForm(forms.Form):
+    file = forms.ImageField()

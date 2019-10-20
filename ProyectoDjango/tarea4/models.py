@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Usuario(models.Model):
-    user = models.ForeignKey(User, models.CASCADE)
+    user = models.OneToOneField(User, models.CASCADE)
     foto = models.ImageField(upload_to='fotitos')
 
 class HistorialDeActividades(models.Model):

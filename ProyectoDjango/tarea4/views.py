@@ -5,6 +5,9 @@ from .models import *
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from .forms import CambioDeImagenForm
 
 
 # Create your views here.
@@ -40,10 +43,22 @@ def login(request):
             except:
                 return render(request, 'LogIn.html')
 
-            user.save()
+            usuario  =Usuario(user=user, foto="static/img/turing.jpg")
+            usuario.save()
             if user is not None:
                 do_login(request,user)
                 return render(request, 'SuccesReg.html')
     return render(request, 'LogIn.html')
 
 
+def cambioImagen(request):
+    if request.method == 'POST':
+        form = CambioDeImagenForm(request.POST, request.FILES)
+        if form.is_valid():
+            usuario = Usuario.objects.get(user=request.user)
+            usuario.foto = request.FILES['file']
+            usuario.save()
+            return HttpResponseRedirect('/perfil/')
+    else:
+        form = CambioDeImagenForm()
+    return render(request, 'CambioDeImagen.html', {'form': form})
