@@ -6,9 +6,12 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from .forms import CambioDeImagenForm
-
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import render, redirect
+from django.utils.translation import ugettext as _
 
 # Create your views here.
 def landingpage(request):
@@ -62,3 +65,19 @@ def cambioImagen(request):
     else:
         form = CambioDeImagenForm()
     return render(request, 'CambioDeImagen.html', {'form': form})
+
+def cambioContraseña(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, _('¡Se ha actualizado la contraseña correctamente!'))
+            return HttpResponseRedirect('/perfil/')
+        else:
+            messages.error(request, _('Porfavor corrregir el error siguiente.'))
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'cambioDeContraseña.html', {
+        'form': form
+    })
