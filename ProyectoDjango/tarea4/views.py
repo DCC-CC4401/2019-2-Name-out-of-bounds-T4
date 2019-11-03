@@ -10,8 +10,9 @@ from .forms import CambioDeImagenForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
+from django.db.models import Q
+from .forms import UserForm
 
 # Create your views here.
 def landingpage(request):
@@ -22,7 +23,101 @@ def logout(request):
     return render(request,'LandingPage.html')
 
 def perfil(request):
-    return render(request, 'UserProfile.html')
+
+    if 'q' in request.GET:
+        query = request.GET.get('q')
+        busqueda = Usuario.objects.filter(
+            Q(user__first_name__icontains=query) | Q(user__last_name__icontains=query)
+        ).exclude(user=request.user)
+
+        for u in busqueda:
+
+            try:
+                usr = Usuario.objects.get(user=request.user)
+                Relaciones.objects.get(user_1=u,user_2=usr)
+                Relaciones.objects.get(user_1=usr,user_2=u)
+                busqueda = busqueda.exclude(user=u.user)
+
+            except Relaciones.DoesNotExist:
+                pass
+    else:
+        busqueda = []
+
+
+    if 'agregar_amigo' in request.POST:
+
+        amigo_form = UserForm(request.POST)
+
+        if amigo_form.is_valid():
+
+            amigo = amigo_form.cleaned_data['email']
+            add = Usuario.objects.get(user__email=amigo)
+            adder = Usuario.objects.get(user=request.user)
+            relacion1 = Relaciones(user_1=adder,user_2=add, estado='1') # 1 manda la solicitud
+            relacion2 = Relaciones(user_1=add, user_2=adder, estado='2') # 1 recibe la solicitud
+            relacion1.save()
+            relacion2.save()
+
+        else:
+            print("wtf")
+
+    elif 'aceptar_sol' in request.POST:
+        amigo_form = UserForm(request.POST)
+        if amigo_form.is_valid():
+            amigo = amigo_form.cleaned_data['email']
+            amigo_usuario = Usuario.objects.get(user__email=amigo)
+            usuario = Usuario.objects.get(user=request.user)
+            rel1 = Relaciones.objects.get(user_1=amigo_usuario, user_2=usuario, estado='1')
+            rel1.estado = '0'
+            rel2 = Relaciones.objects.get(user_1=usuario, user_2=amigo_usuario, estado='2')
+            rel2.estado = '0'
+            rel1.save()
+            rel2.save()
+
+        else:
+            print("wtf2")
+
+    elif 'rechazar_sol' in request.POST:
+        amigo_form = UserForm(request.POST)
+        if amigo_form.is_valid():
+            amigo = amigo_form.cleaned_data['email']
+            amigo_usuario = Usuario.objects.get(user__email=amigo)
+            usuario = Usuario.objects.get(user=request.user)
+            rel1 = Relaciones.objects.get(user_1=amigo_usuario, user_2=usuario, estado='1')
+            rel2 = Relaciones.objects.get(user_1=usuario, user_2=amigo_usuario, estado='2')
+            rel1.delete()
+            rel2.delete()
+
+        else:
+            print("wtf3")
+
+    elif 'eliminar_amigo' in request.POST:
+        amigo_form = UserForm(request.POST)
+        if amigo_form.is_valid():
+            amigo = amigo_form.cleaned_data['email']
+            amigo_usuario = Usuario.objects.get(user__email=amigo)
+            usuario = Usuario.objects.get(user=request.user)
+            rel1 = Relaciones.objects.get(user_1=amigo_usuario, user_2=usuario, estado='0')
+            rel2 = Relaciones.objects.get(user_1=usuario, user_2=amigo_usuario, estado='0')
+            rel1.delete()
+            rel2.delete()
+
+        else:
+            print("wtf4")
+
+    try:
+        solicitudes = Relaciones.objects.filter(user_1__user=request.user, estado='2')
+
+    except Relaciones.DoesNotExist:
+        solicitudes = None
+
+    try:
+        amigos = Relaciones.objects.filter(user_1__user=request.user, estado='0')
+
+    except Relaciones.DoesNotExist:
+        amigos = None
+
+    return render(request, 'UserProfile.html', {'object_list': busqueda, 'sol': solicitudes, 'amigos': amigos})
 
 
 def login(request):
@@ -75,7 +170,7 @@ def cambioContraseña(request):
             messages.success(request, _('¡Se ha actualizado la contraseña correctamente!'))
             return HttpResponseRedirect('/perfil/')
         else:
-            messages.error(request, _('Porfavor corrregir el error siguiente.'))
+            messages.error(request, _('Porfavor corrregir el siguiente error.'))
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'cambioDeContraseña.html', {

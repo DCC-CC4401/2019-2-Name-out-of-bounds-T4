@@ -12,7 +12,6 @@
             <div class="col text-center">
                 <p class="h4 text-center text-dark">{{ user.first_name}} {{ user.last_name }}</p>
                 <a href="cambioImagen" class="btn btn-success" role="button">Cambiar Imagen</a>
-                <a href="cambioContraseña" class="btn btn-success" role="button">Cambiar Contraseña</a>
             </div>
         </div>
 
@@ -25,10 +24,6 @@
                     <li class="nav-item">
                         <a class="nav-link nav-link-fix active" id="profile-tab-mi-perfil" data-toggle="tab"
                            href="#Perfil" role="tab" aria-controls="home" aria-selected="true">Mi Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-fix" id="profile-tab-seguridad" data-toggle="tab" href="#Seguridad"
-                           role="tab" aria-controls="profile" aria-selected="false">Seguridad</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-fix" id="contact-tab-amigos" data-toggle="tab" href="#Amigos"
@@ -49,129 +44,67 @@
 
                 <!--PESTAÑA MI PERFIL-->
                 <div class="tab-pane fade show active" id="Perfil" role="tabpanel" aria-labelledby="Perfil-tab">
-                    <form>
-                        <!--Nombre-->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Nombre:</label>
-                                <input type="text" id="disabledTextInputNombre" class="form-control"
-                                       placeholder="Nombre usuario">
-                            </div>
-                        </fieldset>
 
-                        <!--Apellidos-->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Apellidos:</label>
-                                <input type="text" id="disabledTextInputApellidos" class="form-control"
-                                       placeholder="Apellidos usuario">
-                            </div>
-                        </fieldset>
+                    <p class="h5 text-dark">Nombre : {{ user.first_name }}</p>
+                    <p class="h5 text-dark">Apellido: {{ user.last_name }}</p>
+                    <p class="h5 text-dark">Correo: {{ user.email }}</p>
+                    <a href="cambioContraseña" class="btn btn-success" role="button">Cambiar Contraseña</a>
 
-                        <!--Correo Electronico -->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Correo electronico:</label>
-                                <input type="text" id="disabledTextInput" class="form-control"
-                                       placeholder="correo@usuario.com">
-                            </div>
-                        </fieldset>
-
-                        <!--Fecha de nacimiento -->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Fecha de Nacimiento:</label>
-                                <input type="text" id="disabledTextInputFechaNacimiento" class="form-control"
-                                       placeholder="dd/mm/yyyy">
-                            </div>
-                        </fieldset>
-                    </form>
                 </div>
-
-                <!--PESTAÑA SEGURIDAD-->
-                <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel" aria-labelledby="Seguridad-tab">
-                    <form>
-                        <!--Contraseña actual-->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Contraseña actual:</label>
-                                <input type="text" id="disabledTextInputContraseñaActual" class="form-control"
-                                       placeholder="************">
-                            </div>
-                        </fieldset>
-
-                        <!--Contraseña nueva-->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Nueva Contraseña</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp" placeholder="Nueva Contraseña">
-                        </div>
-
-                        <!--Contraseña confirmacion-->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Confirmación Contraseña</label>
-                            <input type="email" class="form-control" id="Pass-conf" aria-describedby="emailHelp"
-                                   placeholder="Confirmación Contraseña">
-                        </div>
-
-                    </form>
-                    <button type="submit" class="btn btn-success">Cambiar contraseña</button>
-                </div>
-
                 <!--PESTAÑA AMIGOS-->
                 <div class="tab-pane fade" id="Amigos" role="tabpanel" aria-labelledby="Amigos-tab">
 
                     <div class="input-group mb-3">
+                        <!-- Nose porque al añadir el form se echa a perder el formato :c -->
+                        <form action="{% url 'perfil' %}" method="GET">
+                            <table>
+                            <tr>
+                                <td><input name="q" class="form-control" type="text" placeholder="Buscar amigos"></td>
+
+                                <td><button class="btn btn-secondary" type="submit">Buscar</button></td>
+                            </tr>
+
+                            </table>
+                        </form>
+                    </div>
+                        <!--
                         <input type="text" class="form-control" placeholder="Buscar amigos"
                                aria-label="Recipient's username" aria-describedby="button-addon2">
+
                         <div class="input-group-append">
                             <button class="btn btn-secondary" type="button" id="button-addon2">Buscar</button>
                         </div>
-                    </div>
+                        -->
 
-                    <!-- Descomentar este pedazo de codigo para ver interfaz resultados busqueda-->
-                    <!-- Enviar solicitud de Amistad
+                     Enviar solicitud de Amistad
                     <div class="card spaced" style="width: 100%;">
                         <div class="card-header">
                             Resultados búsqueda
+                            <!-- Bug con el id, al hacer click en el boton de busqueda se abren los amigos tambien -->
                             <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
                                     data-target="#friends-list" aria-expanded="false" aria-controls="friends-list"
                                     id="friends-toggle" onclick="toggleName(this.id)">Ver más
                             </button>
                         </div>
                         <ul class="list-group list-group-flush collapse" id="friends-list">
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Evans</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Hemsworth</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Pratt</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Chris Pyne</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
-                                    amigos
-                                </button>
-                            </li>
+
+                            {% for persona in object_list %}
+
+                                <li class="list-group-item">
+                                <img src="{{persona.foto.url}}" width="70px" height="50px">
+                                    <a href="404" class="fr-link">
+                                           {{ persona.user.first_name }} {{ persona.user.last_name }}</a>
+                                <form action="{% url 'perfil' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="email" value="{{ persona.user.email }}"/> <!-- llave de la persona -->
+                                    <button type="submit" name="agregar_amigo" class="btn btn-sm btn-outline-success float-right">Agregar amigo</button>
+
+                                </form>
+                                </li>
+                            {% endfor %}
 
                         </ul>
                     </div>
-                </div> -->
 
                     <!-- Solicitudes de amistad -->
                     <div class="card spaced" style="width: 100%;">
@@ -184,41 +117,25 @@
                             </button>
                         </div>
                         <ul class="list-group list-group-flush collapse" id="friends-request-list">
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Keanu Reeves</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Bobby Tables</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Grace Hopper</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">Ada Lovelace</a>
-                                <button type="button" class="btn btn-sm btn-outline-success float-right">Aceptar
-                                </button>
-                                <p class="float-right" style="margin-left: 10px"></p>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Rechazar
-                                </button>
-                            </li>
+
+                            {% for solicitud in sol %}
+
+                                <li class="list-group-item">
+                                <img src="{{solicitud.user_2.foto.url}}" width="70px" height="50px">
+                                    <a href="404" class="fr-link">
+                                           {{ solicitud.user_2.user.first_name }} {{ solicitud.user_2.user.last_name }}</a>
+                                <form action="{% url 'perfil' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="email" value="{{ solicitud.user_2.user.email }}"/>
+                                    <button type="submit" name="aceptar_sol" class="btn btn-sm btn-outline-success float-right">Aceptar
+                                    </button>
+                                    <p class="float-right" style="margin-left: 10px"></p>
+                                    <button type="submit" name="rechazar_sol" class="btn btn-sm btn-outline-danger float-right">Rechazar
+                                    </button>
+                                </form>
+                                </li>
+
+                            {% endfor %}
 
                         </ul>
                     </div>
@@ -233,30 +150,21 @@
                             </button>
                         </div>
                         <ul class="list-group list-group-flush collapse" id="friends-list">
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Christopher Machine</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Alonzo Church</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Allan Hotdog</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="404" class="fr-link">
-                                    Joan Clarke</a>
-                                <button type="button" class="btn btn-sm btn-outline-danger float-right">Eliminar
-                                </button>
-                            </li>
+                            {% for amigo in amigos %}
+
+                                <li class="list-group-item">
+                                <img src="{{amigo.user_2.foto.url}}" width="70" height="50px">
+                                    <a href="404" class="fr-link">
+                                           {{ amigo.user_2.user.first_name }} {{ amigo.user_2.user.last_name }}</a>
+                                <form action="{% url 'perfil' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="email" value="{{ amigo.user_2.user.email }}"/>
+                                    <button type="submit" name="eliminar_amigo" class="btn btn-sm btn-outline-danger float-right">Eliminar
+                                    </button>
+                                </form>
+                                </li>
+
+                            {% endfor %}
 
                         </ul>
                     </div>

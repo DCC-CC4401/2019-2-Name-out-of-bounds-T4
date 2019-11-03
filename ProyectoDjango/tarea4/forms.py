@@ -16,3 +16,6 @@ class RegisterForm(forms.Form):
 
 class CambioDeImagenForm(forms.Form):
     file = forms.ImageField()
+
+class UserForm(forms.Form):
+    email = forms.EmailField(widget=forms.HiddenInput(), max_length=140)
