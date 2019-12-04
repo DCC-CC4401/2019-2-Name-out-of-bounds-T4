@@ -6,8 +6,6 @@ class IniciarSesionForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-
-
 class RegisterForm(forms.Form):
     name = forms.CharField(max_length=140)
     lastname = forms.CharField(max_length=140)

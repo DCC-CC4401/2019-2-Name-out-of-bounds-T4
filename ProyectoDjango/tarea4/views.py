@@ -14,13 +14,16 @@ from django.utils.translation import ugettext as _
 from django.db.models import Q
 from .forms import UserForm
 
+
 # Create your views here.
 def landingpage(request):
     return render(request, 'LandingPage.html')
 
+
 def logout(request):
     do_logout(request)
-    return render(request,'LandingPage.html')
+    return render(request, 'LandingPageNoLoggeados.html')
+
 
 def perfil(request):
 
@@ -34,15 +37,14 @@ def perfil(request):
 
             try:
                 usr = Usuario.objects.get(user=request.user)
-                Relaciones.objects.get(user_1=u,user_2=usr)
-                Relaciones.objects.get(user_1=usr,user_2=u)
+                Relaciones.objects.get(user_1=u, user_2=usr)
+                Relaciones.objects.get(user_1=usr, user_2=u)
                 busqueda = busqueda.exclude(user=u.user)
 
             except Relaciones.DoesNotExist:
                 pass
     else:
         busqueda = []
-
 
     if 'agregar_amigo' in request.POST:
 
@@ -126,9 +128,9 @@ def login(request):
         if login_form.is_valid():
             user = login_form.cleaned_data['user']
             password = login_form.cleaned_data['password']
-            user=authenticate(username=user,password=password)
+            user = authenticate(username=user, password=password)
             if user is not None:
-                do_login(request,user)
+                do_login(request, user)
                 return render(request, 'LandingPage.html')
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
@@ -137,14 +139,15 @@ def login(request):
             email = register_form.cleaned_data['email']
             password = register_form.cleaned_data['password']
             try:
-                user=User.objects.create_user(username=email, email=email, first_name=name, last_name=lastname, password=password)
+                user = User.objects.create_user(username=email, email=email, first_name=name, last_name=lastname,
+                                                password=password)
             except:
                 return render(request, 'LogIn.html')
 
-            usuario  =Usuario(user=user, foto="static/img/turing.jpg")
+            usuario = Usuario(user=user, foto="static/img/turing.jpg")
             usuario.save()
             if user is not None:
-                do_login(request,user)
+                do_login(request, user)
                 return render(request, 'SuccesReg.html')
     return render(request, 'LogIn.html')
 
@@ -161,6 +164,7 @@ def cambioImagen(request):
         form = CambioDeImagenForm()
     return render(request, 'CambioDeImagen.html', {'form': form})
 
+
 def cambioContraseña(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -170,9 +174,67 @@ def cambioContraseña(request):
             messages.success(request, _('¡Se ha actualizado la contraseña correctamente!'))
             return HttpResponseRedirect('/perfil/')
         else:
-            messages.error(request, _('Porfavor corrregir el siguiente error.'))
+            messages.error(request, _('Por favor corrregir el siguiente error.'))
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'cambioDeContraseña.html', {
         'form': form
     })
+
+
+def register(request):
+    if request.method == 'POST':
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            name = register_form.cleaned_data['name']
+            lastname = register_form.cleaned_data['lastname']
+            email = register_form.cleaned_data['email']
+            password = register_form.cleaned_data['password']
+            try:
+                user = User.objects.create_user(username=email, email=email, first_name=name, last_name=lastname,
+                                                password=password)
+            except:
+                return render(request, 'Register.html')
+
+            usuario = Usuario(user=user, foto="static/img/turing.jpg")
+            usuario.save()
+            if user is not None:
+                do_login(request, user)
+                return render(request, 'LandingPage.html')
+
+    return render(request, 'Register.html')
+
+
+def landing_page_no_loggeados(request):
+    return render(request, 'LandingPageNoLoggeados.html')
+
+
+def LogInStylized(request):
+    if request.method == 'POST':
+        login_form = IniciarSesionForm(request.POST)
+        if login_form.is_valid():
+            user = login_form.cleaned_data['user']
+            password = login_form.cleaned_data['password']
+            user = authenticate(username=user, password=password)
+            if user is not None:
+                do_login(request, user)
+                return render(request, 'LandingPage.html')
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            name = register_form.cleaned_data['name']
+            lastname = register_form.cleaned_data['lastname']
+            email = register_form.cleaned_data['email']
+            password = register_form.cleaned_data['password']
+            try:
+                user = User.objects.create_user(username=email, email=email, first_name=name, last_name=lastname,
+                                                password=password)
+            except:
+                return render(request, 'LogInStylized.html')
+
+            usuario = Usuario(user=user, foto="static/img/turing.jpg")
+            usuario.save()
+            if user is not None:
+                do_login(request, user)
+                return render(request, 'SuccesReg.html')
+    return render(request, 'LogInStylized.html')
+
