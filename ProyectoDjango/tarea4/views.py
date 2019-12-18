@@ -184,24 +184,31 @@ def cambioContraseña(request):
 
 def register(request):
     if request.method == 'POST':
-        register_form = RegisterForm(request.POST)
+        register_form = RegisterForm(request.POST, request.FILES)
+        print(register_form.errors)
         if register_form.is_valid():
             name = register_form.cleaned_data['name']
             lastname = register_form.cleaned_data['lastname']
             email = register_form.cleaned_data['email']
             password = register_form.cleaned_data['password']
+            foto  = request.FILES['file']
             try:
                 user = User.objects.create_user(username=email, email=email, first_name=name, last_name=lastname,
                                                 password=password)
             except:
                 return render(request, 'Register.html')
 
-            usuario = Usuario(user=user, foto="static/img/turing.jpg")
+            print("holi"+str(foto))
+            if request.FILES.get('file', False):
+                foto = "static/img/turing.jpg"
+
+            usuario = Usuario(user=user, foto=foto)
             usuario.save()
             if user is not None:
                 do_login(request, user)
                 return render(request, 'LandingPage.html')
 
+    print("owo")
     return render(request, 'Register.html')
 
 

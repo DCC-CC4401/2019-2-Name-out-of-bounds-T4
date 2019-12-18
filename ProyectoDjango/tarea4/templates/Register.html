@@ -16,7 +16,7 @@
              padding: 2% 5% 2% 5%; -webkit-text-fill-color: #dedede;
              box-shadow: -1px 1px 15px #bbbbbb">
             <h2  class="" style="margin-left: 25%">Registrarse</h2>
-            <form action="{% url 'register' %}" method="post">{% csrf_token %}
+            <form enctype="multipart/form-data" action="{% url 'register' %}" method="post">{% csrf_token %}
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Nombre" name="name"
                                    aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -32,6 +32,10 @@
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" placeholder="Contraseña" name="password"
                                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="file" class="btn btn-success" name="imagenR" value="imagenR" id="imagenR">
+                    <label for="imagenR"> Escojer imagen de perfil</label>
                 </div>
                 <a href="{% url 'landing_page_no_loggeados' %}" class="btn btn-success" style="margin: 0 19px 0 0">Volver atrás</a>
                 <button type="submit" class="btn btn-success" style="margin-left:0">Registrarse</button>
