@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import IniciarSesionForm
 from .forms import RegisterForm
 from .models import *
@@ -7,12 +7,12 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth import logout as do_logout
 from django.http import HttpResponseRedirect
 from .forms import CambioDeImagenForm
-from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.translation import ugettext as _
 from django.db.models import Q
 from .forms import UserForm
+from django.contrib import messages
 
 
 # Create your views here.
